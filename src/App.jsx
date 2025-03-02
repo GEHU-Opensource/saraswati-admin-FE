@@ -1,11 +1,32 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React from 'react'
+import Leaderboard from './Components/Leaderboard'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './Components/Home'
+import Upcoming from './Upcoming.jsx'
+import Students from './Components/Students'
 import AdminPage from './Pages/AdminPage';
 import UpdateAdmin from './Pages/UpdateAdmin';
 import './index.css';
 
-const router = createBrowserRouter([
-  {
+const App = () => {
+  const router= createBrowserRouter([
+    {
+      path:"/",
+      element:<Home/>
+    },
+    {
+      path:"/leaderboard",
+      element:<Leaderboard/>
+    },
+    {
+      path:"/students",
+      element:<Students/>
+    },
+     {
+      path:"/upcoming",
+      element:<Upcoming>
+    }
+     {
     path: "/Adminpage",
     element: <AdminPage /> // Home page
   },
@@ -13,14 +34,13 @@ const router = createBrowserRouter([
     path: "/UpdateAdmin",
     element: <UpdateAdmin />
   }
-]);
-
-const App = () => {
+  ])
   return (
     <>
-      <RouterProvider router={router} />
+    <RouterProvider router={router}/>
+
     </>
   );
 };
 
-export default App;
+export default App
