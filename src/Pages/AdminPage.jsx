@@ -1,59 +1,36 @@
-import React, { useState ,useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { Search } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Search } from "lucide-react";
+
 const AdminPage = () => {
-  const navigate = useNavigate();
   const [DropdownOpen,Dropdownclose] = useState(false);
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(8);
   const [tests, setTests] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/tests")
-      .then(response => setTests(response.data))
-      .catch(error => console.error("Error fetching tests:", error));
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((data) => setTests(data.slice(0, 30))) // Limit to 30 test items
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  
 
   const filteredTests = tests.filter((test) =>
     test.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-300">
+    <div className="flex min-h-screen bg-stone-300">
       {/* Sidebar */}
-      <div className="w-1/4 bg-[#1A1A3D] text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
+      <div className="w-1/4 bg-blue-950 text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
         <h1 className="text-2xl font-bold mb-10">ADMIN</h1>
-
-        <div className="flex flex-col items-center space-y-10 w-full">
-          <button
-            className="bg-white text-black py-3 px-6 rounded-2xl w-4/5 flex items-center justify-center shadow"
-            onClick={() => alert("Create Test Page Coming Soon!")}
-          >
-            Create Test
-          </button>
-          <button
-            className="bg-white text-black py-3 px-6 rounded-2xl w-4/5 flex items-center justify-center shadow"
-            onClick={() => alert("Upcoming Tests Page Coming Soon!")}
-          >
-            Upcoming Tests
-          </button>
-          <button
-            className="bg-white text-black py-3 px-6 rounded-2xl w-4/5 flex items-center justify-center shadow"
-            onClick={() => alert("Student Details Page Coming Soon!")}
-          >
-            View Student Details
-          </button>
+        <div className="flex flex-col items-center space-y-6 w-full">
+          <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Create Test Page Coming Soon!")}>Create Test</button>
+          <button className="bg-white  hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Upcoming Tests Page Coming Soon!")}>Upcoming Tests</button>
+          <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Student Details Page Coming Soon!")}>View Student Details</button>
         </div>
-
-        <div className="mt-auto mb-5">
-          <button className="text-gray-300" onClick={() => alert("Logging out...")}>Log out</button>
-        </div>
+        <button className="mt-auto mb-5 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6 " onClick={() => alert("Logging out...")}>Log out</button>
       </div>
-
-
-      {/* Main Content */}
       <div className="ml-1/4 flex-grow pl-[25%]">
         <div className="flex justify-between items-center bg-white p-6 shadow">
           <h2 className="text-2xl font-bold">ADMIN PAGE</h2>
@@ -78,20 +55,20 @@ const AdminPage = () => {
           }
         </div>
 
+        {/* Search & Test List */}
         <div className="mt-6 p-6">
-          <div className="flex flex-row md:flex-row justify-between items-center mb-4 gap-4">
-            <h3 className="text-lg font-bold">Previous Tests</h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-2xl font-bold">Previous Tests</h3>
             <div className="relative w-full max-w-xs">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
-          </div>
-
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+            </div>
           </div>
 
           <div className="space-y-3">
@@ -99,7 +76,7 @@ const AdminPage = () => {
               filteredTests.slice(0, visibleCount).map((test) => (
                 <button
                   key={test.id}
-                  className="bg-white text-black p-4 rounded-md font-bold w-full text-left shadow"
+                  className="bg-white  p-4 rounded-md text-blue-700 font-semibold w-full text-left shadow"
                   onClick={() => alert(`Opening ${test.title}...`)}
                 >
                   {test.title}
@@ -111,21 +88,10 @@ const AdminPage = () => {
           </div>
 
           {visibleCount < filteredTests.length && (
-            <button
-              className="mt-3 text-left text-blue-500 py-2 px-4 rounded w-full"
-              onClick={() => setVisibleCount(visibleCount + 5)}
-            >
-              Read More
-            </button>
+            <button className="mt-3 text-blue-500 w-full" onClick={() => setVisibleCount(visibleCount + 5)}>Read More</button>
           )}
-
           {visibleCount > 8 && (
-            <button
-              className="mt-3 text-left text-blue-500 py-2 px-4 rounded w-full"
-              onClick={() => setVisibleCount(8)}
-            >
-              Show Less
-            </button>
+            <button className="mt-3 text-blue-500 w-full" onClick={() => setVisibleCount(8)}>Show Less</button>
           )}
         </div>
       </div>
