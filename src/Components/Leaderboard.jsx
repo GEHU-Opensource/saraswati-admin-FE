@@ -48,8 +48,8 @@ const Leaderboard = () => {
     };
 
     return (
-        <main className="py-5 px-20 relative">
-            <div className=" bg-gray-200 rounded-2xl px-5 py-2 w-1/2 my-6 mx-auto">
+        <main className="py-5 px-20 relative bg-sky-100">
+            <div className=" bg-white rounded-2xl px-5 py-2 w-1/2 my-6 mx-auto">
                 <ul className='flex justify-between items-center'>
                     <button
                         onClick={() => handleButtonClick('https://jsonplaceholder.typicode.com/albums', 'ALL')}
@@ -113,7 +113,7 @@ const Leaderboard = () => {
             <div className="board  overflow-hidden">
                 <table className="min-w-full bg-white">
                     <thead>
-                        <tr className="w-full bg-gray-800 text-white">
+                        <tr className="w-full bg-sky-800 text-white">
                             <th className="py-2 px-4 text-start">Name</th>
                             <th className="py-2 px-4 ">University Roll No.</th>
                             <th className="py-2 px-4">Rank</th>
@@ -122,8 +122,8 @@ const Leaderboard = () => {
                     </thead>
                     <tbody>
                         {data.map((item) => (
-                            <tr key={item.id} className="border-b">
-                                <td className="py-2 px-4">{item.title}</td>
+                            <tr key={item.id} className="border-b text-sky-500">
+                                <td className="py-2  px-4">{item.title}</td>
                                 <td className="py-2 px-4 text-center">{item.id}</td>
                                 <td className="py-2 px-4 text-center">Rank</td>
                                 <td className="py-2 px-4 text-center">100</td>

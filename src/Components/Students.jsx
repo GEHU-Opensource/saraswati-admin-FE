@@ -44,7 +44,7 @@ const Students = () => {
 
 
     return (
-        <main className="py-5 px-20 relative">
+        <main className="py-5 px-20 bg-sky-100 relative">
             <ToastContainer />
             {popUpData && <PopUp user={popUpData} ExitPopUp={() => setPopUpData(null)} notifyFUN={() => notify()} updateStudent={updateStudent} />}
             <div>
@@ -93,7 +93,7 @@ const Students = () => {
             <div className="students-list">
                 <table className="min-w-full bg-white">
                     <thead>
-                        <tr className="w-full bg-gray-800 text-white">
+                        <tr className="w-full bg-sky-800 text-white">
                             <th className="py-2 px-4  text-start">Name</th>
                             <th className="py-2 px-4">University Roll No.</th>
                             <th className="py-2 px-4">Info</th>
@@ -102,7 +102,7 @@ const Students = () => {
                     </thead>
                     <tbody>
                         {data.filter(item => filterval === "" || item.id.toString().includes(filterval)).map(student => (
-                            <tr key={student.id} className="border-b">
+                            <tr key={student.id} className="border-b text-sky-600">
                                 <td className="py-2 px-4 ">{student.title}</td>
                                 <td className="py-2 px-4 text-center">{student.id}</td>
                                 <td className="py-2 px-4 text-center">{student.section || "B.Tech CSE III D"}</td>

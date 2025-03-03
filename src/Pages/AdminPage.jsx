@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-
+import { Link } from "react-router-dom";
 const AdminPage = () => {
   const [DropdownOpen,Dropdownclose] = useState(false);
   
@@ -20,13 +20,14 @@ const AdminPage = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-stone-300">
+    <div className="flex min-h-screen bg-sky-100">
       {/* Sidebar */}
-      <div className="w-1/4 bg-blue-950 text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
+      <div className="w-1/4 bg-sky-800 text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
         <h1 className="text-2xl font-bold mb-10">ADMIN</h1>
         <div className="flex flex-col items-center space-y-6 w-full">
-          <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Create Test Page Coming Soon!")}>Create Test</button>
-          <button className="bg-white  hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Upcoming Tests Page Coming Soon!")}>Upcoming Tests</button>
+         
+          <Link to="/createTest" className="bg-white  text-center hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow"><button >Create Test</button></Link> 
+          <Link to="/upcoming" className="bg-white  text-center hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow"><button >Upcoming Tests</button></Link> 
           <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Student Details Page Coming Soon!")}>View Student Details</button>
         </div>
         <button className="mt-auto mb-5 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6 " onClick={() => alert("Logging out...")}>Log out</button>
@@ -76,7 +77,7 @@ const AdminPage = () => {
               filteredTests.slice(0, visibleCount).map((test) => (
                 <button
                   key={test.id}
-                  className="bg-white  p-4 rounded-md text-blue-700 font-semibold w-full text-left shadow"
+                  className="bg-white  p-4 rounded-md text-sky-500 font-semibold w-full text-left shadow"
                   onClick={() => alert(`Opening ${test.title}...`)}
                 >
                   {test.title}
