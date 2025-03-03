@@ -5,9 +5,11 @@ import Leaderboard from './Components/Leaderboard';
 import Students from './Components/Students';
 import Upcoming from './Upcoming.jsx';
 import AdminPage from './Pages/AdminPage';
-import UpdateAdmin from './Pages/UpdateAdmin';
+import UpdateAdmin from './Pages/UpdateAdmins.jsx';
 import './index.css';
 import CreateTest from './Pages/CreateTest.jsx';
+import ManageAdmin from './Pages/ManageAdmin.jsx';
+import CreateAdmin from './Pages/CreateAdmin.jsx';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -36,8 +38,16 @@ const App = () => {
       element: <UpdateAdmin />
     },
     {
+      path: "/createAdmin",
+      element: <CreateAdmin />
+    },
+    {
       path: "/createTest",
       element: <CreateTest />
+    },
+    {
+      path: "/ManageAdmin",
+      element:<ManageAdmin/>
     }
   ]);
 
