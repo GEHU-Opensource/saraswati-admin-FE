@@ -49,7 +49,7 @@ const Leaderboard = () => {
 
     return (
         <main className="py-5 px-20 relative">
-            <div className=" bg-gray-200 rounded-2xl px-5 py-2 w-1/2 my-6 mx-auto">
+            {/* <div className=" bg-gray-200 rounded-2xl px-5 py-2 w-1/2 my-6 mx-auto">
                 <ul className='flex justify-between items-center'>
                     <button
                         onClick={() => handleButtonClick('https://jsonplaceholder.typicode.com/albums', 'ALL')}
@@ -87,7 +87,7 @@ const Leaderboard = () => {
                         HLD
                     </button>
                 </ul>
-            </div>
+            </div> */}
 
             <div className="top_three w-full h-80 my-5 p-5 rounded-2xl flex">
                 <div className="second w-1/3 h-full border-black flex flex-col items-center justify-end">

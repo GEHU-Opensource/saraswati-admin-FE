@@ -1,14 +1,16 @@
 import React from 'react'
-import Leaderboard from './Components/Leaderboard'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Login from './Components/Login'
-import CreateTest from './Components/CreateTest'
-import Home from './Components/Home'
-import Upcoming from './Upcoming.jsx'
-import Students from './Components/Students'
+import Leaderboard from './Pages/Leaderboard'
+import Login from './Pages/Login'
+import CreateTest from './Pages/CreateTest'
+import Students from './Pages/Students'
 import AdminPage from './Pages/AdminPage';
 import UpdateAdmin from './Pages/UpdateAdmin';
+import UpcomingTests from './Pages/UpcomingTests'
+import OrgAdmin from './Pages/OrgAdmin'
+import ManageAdmin from './Pages/ManageAdmin'
+import CreateAdmin from './Pages/CreateAdmin'
 import './index.css';
 
 const App = () => {
@@ -30,17 +32,28 @@ const App = () => {
       element: <CreateTest />
     },
     {
-      path: "/upcoming",
-      element: <Upcoming />
-
+      path: "/adminpage",
+      element: <AdminPage /> 
     },
     {
-      path: "/Adminpage",
-      element: <AdminPage /> // Home page
-    },
-    {
-      path: "/UpdateAdmin",
+      path: "/updateAdmin",
       element: <UpdateAdmin />
+    },
+    {
+      path: "/upcomingtests",
+      element: <UpcomingTests />
+    },
+    {
+      path: "/orgadmin",
+      element: <OrgAdmin />
+    },
+    {
+      path:"/manageadmin",
+      element:<ManageAdmin/>
+    },
+    {
+      path: "/addadmin",
+      element: <CreateAdmin/>
     }
   ])
   return (

@@ -34,7 +34,7 @@ const Students = () => {
         }
     };
 
-    const handleUpload=()=>{
+    const handleUpload = () => {
         console.log("Uploading to backend.\n After fetching from backend then it will be shown to frontend.")
     }
 
@@ -50,7 +50,7 @@ const Students = () => {
             <div>
                 <div className='flex justify-between items-center'>
                     <h2 className='text-4xl font-bold text-gray-800'>Manage Students</h2>
-                    <img  width="50" src={profileImage} className='rounded-full relative top-10 right-10' alt="Profile"/>
+                    <img width="50" src={profileImage} className='rounded-full relative top-10 right-10' alt="Profile" />
                 </div>
             </div>
             <div className='flex p-5 justify-start'>
@@ -74,9 +74,9 @@ const Students = () => {
                 </div>
                 <div className='flex items-baseline'>
                     <button onClick={() => handleUpload()}
-                    className="px-4 py-1 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mx-1">
-                    Add Students
-                </button>
+                        className="px-4 py-1 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mx-1">
+                        Add Students
+                    </button>
                 </div>
             </div>
             <div className="flex justify-between items-center my-5">

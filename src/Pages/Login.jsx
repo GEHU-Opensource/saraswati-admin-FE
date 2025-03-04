@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
-    const[name,setName]= useState();
+    const [name, setName] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -13,11 +13,12 @@ const Login = () => {
     };
 
     return (
-        <div className="flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <div className=" flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-[#f9f9f8]">
+            <div className='border-2 border-black w-1/4 p-8 rounded-2xl bg-white'>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img
                     alt="Your Company"
-                    src="https://resources.saylor.org/wwwresources/wp-content/uploads/20231121110004/gehu-logo.jpeg"
+                    src="/Group.svg"
                     className="mx-auto h-50 w-auto"
                 />
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -42,7 +43,7 @@ const Login = () => {
                             />
                         </div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                           Name
+                            Name
                         </label>
                         <div className="mt-2">
                             <input onChange={(e) => { e.target.value }}
@@ -88,6 +89,7 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     );
