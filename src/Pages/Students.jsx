@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import profileImage from '../assets/profile.png';
 import PopUp from './PopUp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from 'react-router-dom';
 
 const Students = () => {
-    const notify = () => toast("Data updated successfully.");
-
+    const navigate = useNavigate();
+    const notifyUpdate = () => toast("Data updated successfully.");
+    const notifyUpload = () => toast.success("Students added successfully.");
+    const [DropdownOpen, Dropdownclose] = useState(false);
     const [data, setData] = useState([]);
     const [filterval, setFilterval] = useState("");
-    const [popUpData, setPopUpData] = useState(null)
+    const [popUpData, setPopUpData] = useState(null);
+    const [file, setFile] = useState(null);
 
     const fetchData = async (endpoint) => {
         try {
@@ -22,6 +24,11 @@ const Students = () => {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        navigate('/');
+    };
+
     useEffect(() => {
         fetchData('https://jsonplaceholder.typicode.com/albums');
     }, []);
@@ -30,27 +37,45 @@ const Students = () => {
         const confirmed = window.confirm("Are you sure you want to delete this student? \n This action is irreversible.");
         if (confirmed) {
             setData(data.filter(student => student.id !== studentId));
-            toast(`Student ${studentId} deleted successfully.`);
+            toast.error(`Student ${studentId} deleted successfully.`);
         }
     };
 
     const handleUpload = () => {
-        console.log("Uploading to backend.\n After fetching from backend then it will be shown to frontend.")
-    }
+        notifyUpload();
+    };
 
     const updateStudent = (id, name, section) => {
         setData(data.map(student => student.id === id ? { ...student, title: name, section: section } : student));
+        notifyUpdate();
     };
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
 
     return (
-        <main className="py-5 px-20 relative">
+        <main className="py-5 px-10 relative">
             <ToastContainer />
-            {popUpData && <PopUp user={popUpData} ExitPopUp={() => setPopUpData(null)} notifyFUN={() => notify()} updateStudent={updateStudent} />}
+            {popUpData && <PopUp user={popUpData} ExitPopUp={() => setPopUpData(null)} notifyFUN={notifyUpdate} updateStudent={updateStudent} />}
             <div>
                 <div className='flex justify-between items-center'>
                     <h2 className='text-4xl font-bold text-gray-800'>Manage Students</h2>
-                    <img width="50" src={profileImage} className='rounded-full relative top-10 right-10' alt="Profile" />
+                    <button onClick={() => Dropdownclose(!DropdownOpen)} className="block">
+                        <img src="/profile image.png" alt="Profile" className="w-10 h-10 rounded-full" />
+                    </button>
+                    {DropdownOpen && (
+                        <div className="absolute right-4 mt-110 w-90 h-90 bg-white shadow-lg rounded-lg z-10">
+                            <ul className="py-2">
+                                <div className="mb-2 flex items-center justify-center">
+                                    <img src="/profile image.png" alt="profile" className="w-35 h-35" />
+                                </div>
+                                <li className="px-4 py-2 cursor-pointer">Name: Admin</li>
+                                <li className="px-4 py-2 cursor-pointer">Email: admin@example.com</li>
+                                <button className="mt-auto ml-4 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6" onClick={handleLogout}>Logout</button>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className='flex p-5 justify-start'>
@@ -69,12 +94,12 @@ const Students = () => {
             <div className="flex items-end justify-center gap-2 p-2">
                 <div className="">
                     <label className="text-base text-gray-500 font-semibold mb-2 block text-center">Add Students List</label>
-                    <input type="file"
+                    <input type="file" onChange={handleFileChange}
                         className="w-full text-gray-400 font-semibold text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-500 rounded" />
                 </div>
                 <div className='flex items-baseline'>
-                    <button onClick={() => handleUpload()}
-                        className="px-4 py-1 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mx-1">
+                    <button onClick={handleUpload} disabled={!file}
+                        className={`px-4 py-1 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mx-1 ${!file ? 'opacity-50 cursor-not-allowed' : ''}`}>
                         Add Students
                     </button>
                 </div>

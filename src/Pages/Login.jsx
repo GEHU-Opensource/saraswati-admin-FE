@@ -13,8 +13,8 @@ const Login = () => {
     };
 
     return (
-        <div className=" flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-[#f9f9f8]">
-            <div className='border-2 border-black w-1/4 p-8 rounded-2xl bg-white'>
+        <div className=" flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-[#f9f9f8]" style={{ backgroundImage: 'url(/GEHU.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className='border-2 border-black w-1/4 p-8 rounded-2xl bg-white '>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img
                     alt="Your Company"
@@ -29,7 +29,7 @@ const Login = () => {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+                        <label htmlFor="email" className="block text-lg/6 font-medium text-gray-900">
                             Email address
                         </label>
                         <div className="mt-2">
@@ -42,31 +42,19 @@ const Login = () => {
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         </div>
-                        <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                            Name
-                        </label>
-                        <div className="mt-2">
-                            <input onChange={(e) => { e.target.value }}
-                                id="name"
-                                name="name"
-                                type="text"
-                                required
-                                autoComplete="email"
-                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
-                        </div>
+                        
                     </div>
 
                     <div>
                         <div className="flex items-center justify-between">
-                            <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="password" className="block text-lg/6 font-medium text-gray-900">
                                 Password
                             </label>
-                            <div className="text-sm">
+                            {/* <div className="text-sm">
                                 <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                                     Forgot password?
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="mt-2">
                             <input
