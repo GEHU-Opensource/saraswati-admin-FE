@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
-  const [DropdownOpen,Dropdownclose] = useState(false);
-  
+  const navigate = useNavigate();
+  const [DropdownOpen, Dropdownclose] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(8);
   const [tests, setTests] = useState([]);
@@ -19,50 +20,64 @@ const AdminPage = () => {
     test.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/')
+  };
+
+  const handleTestClick = (test) => {
+    // Navigate to the leaderboard page and pass the test data as state
+    navigate('/leaderboard');
+  };
+
   return (
-    <div className="flex min-h-screen bg-stone-300">
+    <div className="flex min-h-screen bg-gray-200">
       {/* Sidebar */}
-      <div className="w-1/4 bg-blue-950 text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
+      <div className="w-1/4 bg-[#3d53a0] text-white flex flex-col items-center p-5 h-screen fixed left-0 top-0">
         <h1 className="text-2xl font-bold mb-10">ADMIN</h1>
         <div className="flex flex-col items-center space-y-6 w-full">
-          <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Create Test Page Coming Soon!")}>Create Test</button>
-          <button className="bg-white  hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Upcoming Tests Page Coming Soon!")}>Upcoming Tests</button>
-          <button className="bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 shadow" onClick={() => alert("Student Details Page Coming Soon!")}>View Student Details</button>
+          <button className="shadow-md shadow-black bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 ">
+            <Link to="/createtest">Create Test</Link>
+          </button>
+          <button className="shadow-md shadow-black bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 ">
+            <Link to="/upcomingtests">Upcoming Tests</Link>
+          </button>
+          <button className="shadow-md shadow-black bg-white hover:bg-gray-300 text-black py-3 px-6 rounded-xl w-3/5 " onClick={() => alert("Student Details Page is in Phase II!")}>
+            View Student Details
+          </button>
         </div>
-        <button className="mt-auto mb-5 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6 " onClick={() => alert("Logging out...")}>Log out</button>
+        <button className="mt-auto mb-5 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6" onClick={handleLogout}>
+          Log out
+        </button>
       </div>
       <div className="ml-1/4 flex-grow pl-[25%]">
-        <div className="flex justify-between items-center bg-white p-6 shadow">
+        <div className="flex justify-between items-center bg-white p-8 shadow">
           <h2 className="text-2xl font-bold">ADMIN PAGE</h2>
-          <button onClick={()=>Dropdownclose(!DropdownOpen)} className="block">
+          <button onClick={() => Dropdownclose(!DropdownOpen)} className="block">
             <img src="/profile image.png" alt="Profile" className="w-10 h-10 rounded-full" />
           </button>
           {DropdownOpen && (
-            <div className="absolute right-0 mt-130 w-90 h-120 bg-white shadow-lg rounded-lg z-10">
-            <ul className="py-2">
-              <div className="mb-2 flex items-center justify-center">
-                <img src="/profile image.png" alt="profile" className=" w-35 h-35" />
-              </div>
-              <li className="flex justify-center font-bold px-4 py-2 cursor-pointer">Orgination name</li>
-              <li className="px-4 py-2 cursor-pointer">Name: Admin</li>
-              <li className="px-4 py-2 cursor-pointer">Email: admin@example.com</li>
-              <li className="px-4 py-2 cursor-pointer border-t" onClick={() => alert("Logging out...")}>
-                Logout
-              </li>
-            </ul>
+            <div className="absolute right-4 mt-110 w-90 h-90 bg-white shadow-lg rounded-lg z-10">
+              <ul className="py-2">
+                <div className="mb-2 flex items-center justify-center">
+                  <img src="/profile image.png" alt="profile" className="w-35 h-35" />
+                </div>
+                <li className="px-4 py-2 cursor-pointer">Name: Admin</li>
+                <li className="px-4 py-2 cursor-pointer">Email: admin@example.com</li>
+                <button className="mt-auto ml-4 text-gray-300 bg-red-600 font-semibold hover:bg-red-800 rounded-sm py-2 px-6" onClick={handleLogout}>Logout</button>
+              </ul>
             </div>
-          )
-          }
+          )}
         </div>
 
         {/* Search & Test List */}
-        <div className="mt-6 p-6">
-          <div className="flex justify-between items-center mb-4">
+        <div className="mt-6 p-6 flex flex-col items-center justify-center">
+          <div className="flex justify-between items-center mb-4 w-full">
             <h3 className="text-2xl font-bold">Previous Tests</h3>
             <div className="relative w-full max-w-xs">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search Tests..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -76,8 +91,8 @@ const AdminPage = () => {
               filteredTests.slice(0, visibleCount).map((test) => (
                 <button
                   key={test.id}
-                  className="bg-white  p-4 rounded-md text-blue-700 font-semibold w-full text-left shadow"
-                  onClick={() => alert(`Opening ${test.title}...`)}
+                  className="bg-[#f9f9f8] p-4 rounded-md text-[#3d53a0] font-semibold w-full text-left shadow"
+                  onClick={() => handleTestClick(test)}
                 >
                   {test.title}
                 </button>
@@ -87,13 +102,16 @@ const AdminPage = () => {
             )}
           </div>
 
-          {visibleCount < filteredTests.length && (
-            <button className="mt-3 text-blue-500 w-full" onClick={() => setVisibleCount(visibleCount + 5)}>Read More</button>
-          )}
-          {visibleCount > 8 && (
-            <button className="mt-3 text-blue-500 w-full" onClick={() => setVisibleCount(8)}>Show Less</button>
-          )}
+          <div className="flex justify-end items-center w-full">
+            {visibleCount < filteredTests.length && (
+              <button className="mt-3 bg-blue-500 text-white p-3 rounded-full m-2" onClick={() => setVisibleCount(visibleCount + 5)}>Show More</button>
+            )}
+            {visibleCount > 8 && (
+              <button className="mt-3 bg-red-500 text-white p-3 rounded-full m-2" onClick={() => setVisibleCount(8)}>Show Less</button>
+            )}
+          </div>
         </div>
+
       </div>
     </div>
   );

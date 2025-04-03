@@ -1,39 +1,60 @@
 import React from 'react'
-import Leaderboard from './Components/Leaderboard'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './Components/Home'
-import Upcoming from './Upcoming.jsx'
-import Students from './Components/Students'
+
+import Leaderboard from './Pages/Leaderboard'
+import Login from './Pages/Login'
+import CreateTest from './Pages/CreateTest'
+import Students from './Pages/Students'
 import AdminPage from './Pages/AdminPage';
 import UpdateAdmin from './Pages/UpdateAdmin';
+import UpcomingTests from './Pages/UpcomingTests'
+import OrgAdmin from './Pages/OrgAdmin'
+import ManageAdmin from './Pages/ManageAdmin'
+import CreateAdmin from './Pages/CreateAdmin'
 import './index.css';
 
 const App = () => {
-  const router= createBrowserRouter([
+  const router = createBrowserRouter([
     {
-      path:"/",
-      element:<Home/>
+      path: "/",
+      element: <Login />
     },
     {
       path:"/leaderboard",
-      element:<Leaderboard/>
+      element:<Leaderboard />
     },
     {
       path:"/students",
-      element:<Students/>
+      element:<Students />
     },
-     {
-      path:"/upcoming",
-      element:<Upcoming>
+    {
+      path: "/createtest",
+      element: <CreateTest />
+    },
+    {
+      path: "/adminpage",
+      element: <AdminPage /> 
+    },
+    {
+      path: "/updateAdmin",
+      element: <UpdateAdmin />
+    },
+    {
+      path: "/upcomingtests",
+      element: <UpcomingTests />
+    },
+    {
+      path: "/orgadmin",
+      element: <OrgAdmin />
+    },
+    {
+      path:"/manageadmin",
+      element:<ManageAdmin/>
+    },
+    {
+      path: "/addadmin",
+      element: <CreateAdmin/>
     }
-     {
-    path: "/Adminpage",
-    element: <AdminPage /> // Home page
-  },
-  {
-    path: "/UpdateAdmin",
-    element: <UpdateAdmin />
-  }
   ])
   return (
     <>
